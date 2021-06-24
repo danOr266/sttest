@@ -3,6 +3,10 @@ import yfinance as yf
 import streamlit as st
 import pandas as pd
 import numpy as np
+import plotly.express as px
+#import plotly.figure_factory as ff
+
+
 #import urllib
 #import pyodbc
 #from sqlalchemy import create_engine
@@ -23,19 +27,18 @@ Inc_Exp = pd.read_csv(Inc_Exp)
 st.write("""
 """)
 
-option = st.sidebar.selectbox(
-    'Which number do you like best?',
-     ['Apple', 'Banana'])
 
-'You selected:', option
-Inc_Exp
 st.write(Inc_Exp)
+
+
+fig = px.line( data = Inc_Exp, x = 'Payment_Date', y = 'Cum_Interest', color="BSV_Ind", line_group="Scenario")
+st.plotly_chart(fig, use_container_width=True)
 
 
 tickerSymbol = 'GOOGL'
 tickerData =  yf.Ticker(tickerSymbol)
 tickerDf = tickerData.history(period = 'id', start = '2010-05-01', end = '2021-06-01')
-Inc_Exp
+tickerDf
 
 chart_data = pd.DataFrame(
      np.random.randn(20, 3),
