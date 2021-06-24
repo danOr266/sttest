@@ -18,7 +18,7 @@ import numpy as np
 
 st.title('Loan Comparison App')
 
-Inc_Exp = st.sidebar.file_uploader('File uploader')
+Inc_Exp = st.sidebar.file_uploader('File uploader', type=["csv"],   )
 Inc_Exp = pd.read_csv(Inc_Exp)
 st.write("""
 """)
@@ -28,8 +28,8 @@ option = st.sidebar.selectbox(
      ['Apple', 'Banana'])
 
 'You selected:', option
-
-st.dataframe(Inc_Exp)
+Inc_Exp
+st.write(Inc_Exp)
 
 
 tickerSymbol = 'GOOGL'
