@@ -18,7 +18,7 @@ import numpy as np
 
 st.title('Loan Comparison App')
 
-Inc_Exp = st.sidebar.file_uploader('File uploader', type=["csv"],   )
+Inc_Exp = st.sidebar.file_uploader('File uploader', type=["csv"]   )
 Inc_Exp = pd.read_csv(Inc_Exp)
 st.write("""
 """)
