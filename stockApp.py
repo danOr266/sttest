@@ -9,6 +9,13 @@ st.title('My First App')
 st.write("""
 """)
 
+option = st.sidebar.selectbox(
+    'Which number do you like best?',
+     df['first column'])
+
+'You selected:', option
+
+
 tickerSymbol = 'GOOGL'
 tickerData =  yf.Ticker(tickerSymbol)
 tickerDf = tickerData.history(period = 'id', start = '2010-05-01', end = '2021-06-01')
