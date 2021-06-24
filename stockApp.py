@@ -4,12 +4,12 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import urllib
-import pyodbc
+import pypyodbc
 from sqlalchemy import create_engine
 
 
 #Setting up Database Connection
-conn = pyodbc.connect('''Driver={ODBC Driver 17 for SQL Server};Server=(localdb)\MSSQLLocalDB;Database=Zuhause;Trusted_Connection=yes;''')
+conn = pypyodbc.connect('''Driver={ODBC Driver 17 for SQL Server};Server=(localdb)\MSSQLLocalDB;Database=Zuhause;Trusted_Connection=yes;''')
 cursor = conn.cursor()
 quoted = urllib.parse.quote_plus("DRIVER={ODBC Driver 17 for SQL Server};SERVER=(localdb)\MSSQLLocalDB;Database=Zuhause;Trusted_Connection=yes;")
 engine = create_engine('mssql+pyodbc:///?odbc_connect={}'.format(quoted))
