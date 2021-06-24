@@ -31,7 +31,7 @@ st.write("""
 st.write(Inc_Exp)
 
 
-fig = px.line( Inc_Exp, x = 'Payment_Date', y = 'Cum_Interest', color="BSV_Ind", line_group="Scenario")
+fig = px.line( Inc_Exp, x = 'Payment_Date', y = 'Cum_Interest', color="BSV_ind", line_group="Scenario")
 st.plotly_chart(fig, use_container_width=True)
 
 
