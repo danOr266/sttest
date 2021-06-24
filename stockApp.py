@@ -11,7 +11,7 @@ st.write("""
 
 option = st.sidebar.selectbox(
     'Which number do you like best?',
-     df['first column'])
+     ['Apple', 'Banana'])
 
 'You selected:', option
 
