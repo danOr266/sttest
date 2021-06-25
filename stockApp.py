@@ -37,7 +37,7 @@ if Inc_Exp is not None:
     
     st.write('You are comparing the following shock Scenarios:', print(shock_to_compare))
     
-    imported = tester(shock_to_compare)
+    imported = tester.multikulti(shock_to_compare)
     st.write(imported)
     
     
