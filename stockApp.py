@@ -35,7 +35,7 @@ if Inc_Exp is not None:
          'Select the Interest Shock scenarios you would like to compare?',
          Inc_Exp.Shock.unique())
     
-    st.write('You are comparing the following shock Scenarios:', shock_to_compare)
+    st.write('You are comparing the following shock Scenarios:', print(shock_to_compare.va ))
     
     st.write("""
              
@@ -47,7 +47,7 @@ if Inc_Exp is not None:
          'Select the Zinsbindung scenarios you would like to compare?',
          Inc_Exp.ZB.unique())
     
-    st.write('You are comparing the following Zinsbindung Scenarios:', ZB_to_compare)
+    st.write('You are comparing the following Zinsbindung Scenarios:',  print(ZB_to_compare))
     st.write("""
              
     """)
@@ -58,7 +58,7 @@ if Inc_Exp is not None:
          'Select the Bausparvertag scenarios you would like to compare?',
          Inc_Exp.BSV_ind.unique())
     
-    st.write('You are comparing the following Bausparvertag Scenarios:', BSV_ind_to_compare)
+    st.write('You are comparing the following Bausparvertag Scenarios:',  print(BSV_ind_to_compare))
     st.write("""
              
     """)
