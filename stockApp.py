@@ -30,7 +30,7 @@ shock_to_compare = st.sidebar.multiselect(
      'How would you like to be contacted?',
      Inc_Exp.Shock.unique())
 
-st.write('You selected:', option)
+st.write('You are comparing the following shock Scenarios:', shock_to_compare)
 st.write("""
 """)
 
