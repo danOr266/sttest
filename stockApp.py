@@ -26,7 +26,7 @@ Inc_Exp = st.sidebar.file_uploader('File uploader', type=["csv"]   )
 Inc_Exp = pd.read_csv(Inc_Exp)
 
 st.sidebar.subheader('Scenario Selection')
-option = st.sidebar.multiselect(
+shock_to_compare = st.sidebar.multiselect(
      'How would you like to be contacted?',
      Inc_Exp.Shock.unique())
 
@@ -40,7 +40,7 @@ st.write(Inc_Exp)
 
 Inc_Exp1=Inc_Exp.copy().dropna()
 
-fig = px.line(Inc_Exp1, x="Payment_Date", y="Sched_Payment", color="Scenario", 
+fig = px.line(Inc_Exp1[Inc_Exp1.Shock.isin(shock_to_compare))], x="Payment_Date", y="Sched_Payment", color="Scenario", 
               line_dash="BSV_ind", hover_name="Scenario")
 
 st.plotly_chart(fig, use_container_width=True)
