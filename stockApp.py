@@ -36,9 +36,9 @@ if Inc_Exp is not None:
          Inc_Exp.Shock.unique())
     
     st.write('You are comparing the following shock Scenarios:', print(shock_to_compare))
-    
-    imported = tester.multikulti([shock_to_compare])
-    st.write(imported)
+    if shock_to_compare is not None:
+        imported = tester.multikulti(list(shock_to_compare))
+        st.write(imported)
     
     
     st.sidebar.subheader('Zinsbindung Selection')
