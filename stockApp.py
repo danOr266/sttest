@@ -28,7 +28,7 @@ Inc_Exp = pd.read_csv(Inc_Exp)
 st.sidebar.subheader('Scenario Selection')
 option = st.sidebar.multiselect(
      'How would you like to be contacted?',
-     [Email', 'Home phone', 'Mobile phone'])
+     ['Email', 'Home phone', 'Mobile phone'])
 
 st.write('You selected:', option)
 st.write("""
