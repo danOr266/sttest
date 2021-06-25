@@ -12,7 +12,7 @@ import pandas as pd
 
 j = 0
 def multikulti( *argv):
-    for i in (*argv) :
+    for i in (argv) :
         y =np.array()
         y[j] = i**2
     return y
