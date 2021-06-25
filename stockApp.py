@@ -26,7 +26,7 @@ Inc_Exp = st.sidebar.file_uploader('File uploader', type=["csv"]   )
 Inc_Exp = pd.read_csv(Inc_Exp)
 
 st.sidebar.subheader('Scenario Selection')
-option = st.selectbox(
+option = st.sidebar.checkbox(
      'How would you like to be contacted?',
      ('Email', 'Home phone', 'Mobile phone'))
 
