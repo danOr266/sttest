@@ -25,54 +25,59 @@ st.title('Loan Comparison App')
 Inc_Exp = st.sidebar.file_uploader('File uploader', type=["csv"]   )
 Inc_Exp = pd.read_csv(Inc_Exp)
 
-st.sidebar.subheader('Scenario Selection')
-shock_to_compare = st.sidebar.multiselect(
-     'How would you like to be contacted?',
-     Inc_Exp.Shock.unique())
 
-st.write('You are comparing the following shock Scenarios:', shock_to_compare)
-
-st.write("""
-         
-""")
-
-
-st.sidebar.subheader('Zinsbindung Selection')
-ZB_to_compare = st.sidebar.multiselect(
-     'How would you like to be contacted?',
-     Inc_Exp.ZB.unique())
-
-st.write('You are comparing the following Zinsbindung Scenarios:', ZB_to_compare)
-st.write("""
-         
-""")
-
-
-st.sidebar.subheader('Bausparvertag Selection')
-BSV_ind_to_compare = st.sidebar.multiselect(
-     'How would you like to be contacted?',
-     Inc_Exp.BSV_ind.unique())
-
-st.write('You are comparing the following Bausparvertag Scenarios:', BSV_ind_to_compare)
-st.write("""
-         
-""")
-
-
-st.write(Inc_Exp)
-
-
-Inc_Exp1=Inc_Exp.copy()[(Inc_Exp1.Shock.isin(shock_to_compare))&(Inc_Exp1.ZB.isin(ZB_to_compare))&(Inc_Exp1.BSV_ind.isin(BSV_ind_to_compare))].dropna()
-
-st.subheader('Scheduled payment Comparison')
-fig = px.line(Inc_Exp1, x="Payment_Date", y="Sched_Payment", color="Scenario", 
-              line_dash="BSV_ind", hover_name="Scenario")
-
-st.plotly_chart(fig, use_container_width=True)
-
-
-st.subheader('Cumulative Interest Comparison')
-fig = px.line(Inc_Exp1[Inc_Exp1, x="Payment_Date", y="Cum_Interest", color="Scenario", 
-              line_dash="BSV_ind", hover_name="Scenario")
-
-st.plotly_chart(fig, use_container_width=True)
+if Inc_Exp is not None:
+    
+    st.sidebar.subheader('Scenario Selection')
+    shock_to_compare = st.sidebar.multiselect(
+         'How would you like to be contacted?',
+         Inc_Exp.Shock.unique())
+    
+    st.write('You are comparing the following shock Scenarios:', shock_to_compare)
+    
+    st.write("""
+             
+    """)
+    
+    
+    st.sidebar.subheader('Zinsbindung Selection')
+    ZB_to_compare = st.sidebar.multiselect(
+         'How would you like to be contacted?',
+         Inc_Exp.ZB.unique())
+    
+    st.write('You are comparing the following Zinsbindung Scenarios:', ZB_to_compare)
+    st.write("""
+             
+    """)
+    
+    
+    st.sidebar.subheader('Bausparvertag Selection')
+    BSV_ind_to_compare = st.sidebar.multiselect(
+         'How would you like to be contacted?',
+         Inc_Exp.BSV_ind.unique())
+    
+    st.write('You are comparing the following Bausparvertag Scenarios:', BSV_ind_to_compare)
+    st.write("""
+             
+    """)
+    
+    
+    st.write(Inc_Exp)
+    
+    
+    Inc_Exp1=Inc_Exp.copy()[(Inc_Exp1.Shock.isin(shock_to_compare))&(Inc_Exp1.ZB.isin(ZB_to_compare))&(Inc_Exp1.BSV_ind.isin(BSV_ind_to_compare))].dropna()
+    
+    st.subheader('Scheduled payment Comparison')
+    fig = px.line(Inc_Exp1, x="Payment_Date", y="Sched_Payment", color="Scenario", 
+                  line_dash="BSV_ind", hover_name="Scenario")
+    
+    st.plotly_chart(fig, use_container_width=True)
+    
+    
+    st.subheader('Cumulative Interest Comparison')
+    fig = px.line(Inc_Exp1[Inc_Exp1, x="Payment_Date", y="Cum_Interest", color="Scenario", 
+                  line_dash="BSV_ind", hover_name="Scenario")
+    
+    st.plotly_chart(fig, use_container_width=True)
+else :
+    pass
