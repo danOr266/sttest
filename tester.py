@@ -15,6 +15,6 @@ def multikulti( *argv):
     y =np.array([0.0])
     for i in (argv) :
         
-        y[j] = i**2
+        y[j] = pow(i,2)
     return y
     
