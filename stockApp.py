@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 import plotly.express as px
 #import plotly.figure_factory as ff
-
+import tester
 
 #import urllib
 #import pyodbc
@@ -37,9 +37,8 @@ if Inc_Exp is not None:
     
     st.write('You are comparing the following shock Scenarios:', print(shock_to_compare))
     
-    st.write("""
-             
-    """)
+    imported = tester(shock_to_compare)
+    st.write(imported)
     
     
     st.sidebar.subheader('Zinsbindung Selection')
