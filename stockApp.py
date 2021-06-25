@@ -64,20 +64,20 @@ if Inc_Exp is not None:
     
     st.write(Inc_Exp)
     
-    
-    Inc_Exp1=Inc_Exp.copy()[(Inc_Exp1.Shock.isin(shock_to_compare))&(Inc_Exp1.ZB.isin(ZB_to_compare))&(Inc_Exp1.BSV_ind.isin(BSV_ind_to_compare))].dropna()
-    
-    st.subheader('Scheduled payment Comparison')
-    fig = px.line(Inc_Exp1, x="Payment_Date", y="Sched_Payment", color="Scenario", 
-                  line_dash="BSV_ind", hover_name="Scenario")
-    
-    st.plotly_chart(fig, use_container_width=True)
-    
-    
-    st.subheader('Cumulative Interest Comparison')
-    fig = px.line(Inc_Exp1, x="Payment_Date", y="Cum_Interest", color="Scenario", 
-                  line_dash="BSV_ind", hover_name="Scenario")
-    
-    st.plotly_chart(fig, use_container_width=True)
+    if all(ZB_to_compare, BSV_ind_to_compare, shock_to_compare) in not None:
+        Inc_Exp1=Inc_Exp.copy()[(Inc_Exp1.Shock.isin(shock_to_compare))&(Inc_Exp1.ZB.isin(ZB_to_compare))&(Inc_Exp1.BSV_ind.isin(BSV_ind_to_compare))].dropna()
+        
+        st.subheader('Scheduled payment Comparison')
+        fig = px.line(Inc_Exp1, x="Payment_Date", y="Sched_Payment", color="Scenario", 
+                      line_dash="BSV_ind", hover_name="Scenario")
+        
+        st.plotly_chart(fig, use_container_width=True)
+        
+        
+        st.subheader('Cumulative Interest Comparison')
+        fig = px.line(Inc_Exp1, x="Payment_Date", y="Cum_Interest", color="Scenario", 
+                      line_dash="BSV_ind", hover_name="Scenario")
+        
+        st.plotly_chart(fig, use_container_width=True)
 else :
     pass
