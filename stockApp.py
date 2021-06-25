@@ -28,9 +28,9 @@ Inc_Exp = pd.read_csv(Inc_Exp)
 
 if Inc_Exp is not None:
     
-    st.sidebar.subheader('Scenario Selection')
+    st.sidebar.subheader('Interest Shock Selection')
     shock_to_compare = st.sidebar.multiselect(
-         'How would you like to be contacted?',
+         'Select the Interest Shock scenarios you would like to compare?',
          Inc_Exp.Shock.unique())
     
     st.write('You are comparing the following shock Scenarios:', shock_to_compare)
@@ -42,7 +42,7 @@ if Inc_Exp is not None:
     
     st.sidebar.subheader('Zinsbindung Selection')
     ZB_to_compare = st.sidebar.multiselect(
-         'How would you like to be contacted?',
+         'Select the Zinsbindung scenarios you would like to compare?',
          Inc_Exp.ZB.unique())
     
     st.write('You are comparing the following Zinsbindung Scenarios:', ZB_to_compare)
@@ -53,7 +53,7 @@ if Inc_Exp is not None:
     
     st.sidebar.subheader('Bausparvertag Selection')
     BSV_ind_to_compare = st.sidebar.multiselect(
-         'How would you like to be contacted?',
+         'Select the Bausparvertag scenarios you would like to compare?',
          Inc_Exp.BSV_ind.unique())
     
     st.write('You are comparing the following Bausparvertag Scenarios:', BSV_ind_to_compare)
@@ -75,7 +75,7 @@ if Inc_Exp is not None:
     
     
     st.subheader('Cumulative Interest Comparison')
-    fig = px.line(Inc_Exp1[Inc_Exp1, x="Payment_Date", y="Cum_Interest", color="Scenario", 
+    fig = px.line(Inc_Exp1, x="Payment_Date", y="Cum_Interest", color="Scenario", 
                   line_dash="BSV_ind", hover_name="Scenario")
     
     st.plotly_chart(fig, use_container_width=True)
