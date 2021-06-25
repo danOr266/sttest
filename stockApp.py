@@ -64,8 +64,9 @@ if Inc_Exp is not None:
     
     st.write(Inc_Exp)
     
-    if all([ZB_to_compare, BSV_ind_to_compare, shock_to_compare]) is not None:
-        Inc_Exp1=Inc_Exp.copy()[(Inc_Exp1.Shock.isin(shock_to_compare))&(Inc_Exp1.ZB.isin(ZB_to_compare))&(Inc_Exp1.BSV_ind.isin(BSV_ind_to_compare))].dropna()
+    if any([ZB_to_compare, BSV_ind_to_compare, shock_to_compare]) is not None:
+        Inc_Exp1=Inc_Exp.copy()
+        Inc_Exp1=Inc_Exp1[(Inc_Exp1.Shock.isin(shock_to_compare))&(Inc_Exp1.ZB.isin(ZB_to_compare))&(Inc_Exp1.BSV_ind.isin(BSV_ind_to_compare))].dropna()
         
         st.subheader('Scheduled payment Comparison')
         fig = px.line(Inc_Exp1, x="Payment_Date", y="Sched_Payment", color="Scenario", 
