@@ -33,7 +33,11 @@ st.write("""
 st.write(Inc_Exp)
 
 
-fig = px.line( data = Inc_Exp, x = 'Payment_Date', y = 'Cum_Interest', color="BSV_Ind", line_group="Scenario")
+Inc_Exp1=Inc_Exp.copy().dropna()
+
+fig = px.line(Inc_Exp1, x="Payment_Date", y="Sched_Payment", color="Scenario", 
+              line_dash="BSV_ind", hover_name="Scenario")
+
 st.plotly_chart(fig, use_container_width=True)
 
 
