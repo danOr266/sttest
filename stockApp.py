@@ -22,11 +22,10 @@ import plotly.express as px
 
 st.title('Loan Comparison App')
 
-if 'Inc_Exp' not in globals():
-    Inc_Exp = st.sidebar.file_uploader('File uploader', type=["csv"]   )
-    Inc_Exp = pd.read_csv(Inc_Exp)
-else :
-    pass
+
+Inc_Exp = st.sidebar.file_uploader('File uploader', type=["csv"]   )
+Inc_Exp = pd.read_csv(Inc_Exp)
+
 
 
 if Inc_Exp is not None:
