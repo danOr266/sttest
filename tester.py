@@ -11,10 +11,8 @@ import pandas as pd
 
 
 j = 0
-def multikulti( *argv):
-    y =np.array([0.0])
-    for i in (argv) :
-        
-        y[j] = pow(i,2)
+def multikulti(x):
+    y =np.power(x, 2)
+    
     return y
     
