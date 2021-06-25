@@ -40,22 +40,15 @@ st.write(Inc_Exp)
 
 Inc_Exp1=Inc_Exp.copy().dropna()
 
+st.subheader('Scheduled payment Comparison')
 fig = px.line(Inc_Exp1[Inc_Exp1.Shock.isin(shock_to_compare)], x="Payment_Date", y="Sched_Payment", color="Scenario", 
               line_dash="BSV_ind", hover_name="Scenario")
 
 st.plotly_chart(fig, use_container_width=True)
 
 
-tickerSymbol = 'GOOGL'
-tickerData =  yf.Ticker(tickerSymbol)
-tickerDf = tickerData.history(period = 'id', start = '2010-05-01', end = '2021-06-01')
-tickerDf
+st.subheader('Cumulative Interest Comparison')
+fig = px.line(Inc_Exp1[Inc_Exp1.Shock.isin(shock_to_compare)], x="Payment_Date", y="Cum_Interest", color="Scenario", 
+              line_dash="BSV_ind", hover_name="Scenario")
 
-chart_data = pd.DataFrame(
-     np.random.randn(20, 3),
-     columns=['a', 'b', 'c'])
-
-st.line_chart(chart_data)
-
-st.line_chart(tickerDf.Close)
-st.line_chart(tickerDf.Volume)
+st.plotly_chart(fig, use_container_width=True)
