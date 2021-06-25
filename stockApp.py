@@ -36,8 +36,12 @@ if Inc_Exp is not None:
          Inc_Exp.Shock.unique())
     
     st.write('You are comparing the following shock Scenarios:', print(shock_to_compare))
-    if shock_to_compare is not None:
-        imported = tester.multikulti(list(shock_to_compare))
+    S2Compare = list()
+    for i in shock_to_compare:
+        S2Compare.append(i)
+        
+    if S2Compare is not None:
+        imported = tester.multikulti(S2Compare)
         st.write(imported)
     
     
