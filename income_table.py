@@ -38,6 +38,8 @@ def income_table(start_date, income_p1, income_p2, income_increase_rate ,bonus =
     df['cum_net_income'] = (df['tot_Income'] -  df['living_exp']).cumsum()
     df['BSV_ind'] = BSV_ind
     df['BSV_extra'] = BSV_extra
+    df.reset_index(inplace = True) 
+    df['Payment_Date'] = df['Payment_Date'].dt.date
     df= round(df, 2)
-    df.reset_index(inplace = True)    
+       
     return df
