@@ -39,7 +39,8 @@ income_projection_start_date = st.sidebar.date_input(label = 'Selection income s
                                                        value =None, min_value = date.today())
 
 #income_projection_start_date = income_projection_start_date.datetime.date()
-income_projection_table = income_table.income_table(start_date = income_projection_start_date, income_p1 = 3000, income_p2 = 1700, income_increase_rate = 1.015)
+income_projection_table = pd.concat(income_table.income_table(start_date = income_projection_start_date, income_p1 = 3000, income_p2 = 1700, income_increase_rate = 1.015),
+                                    income_table.income_table(start_date = income_projection_start_date, income_p1 = 3000, income_p2 = 1700, income_increase_rate = 1.015, BSV_ind = 0, BSV_extra = 0))
 
 st.write(income_projection_table)
 
