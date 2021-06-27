@@ -4,6 +4,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import plotly.express as px
+import numpy_financial as npf
 from datetime import *
 #import plotly.figure_factory as ff
 import tester
