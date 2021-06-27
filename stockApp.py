@@ -27,8 +27,8 @@ import income_table
 st.title('Loan Comparison App')
 
 
-Inc_Exp = st.sidebar.file_uploader('File uploader', type=["csv"]   )
-Inc_Exp = pd.read_csv(Inc_Exp)
+#Inc_Exp = st.sidebar.file_uploader('File uploader', type=["csv"]   )
+#Inc_Exp = pd.read_csv(Inc_Exp)
 
 ZB_array = np.array([10, 15, 20])
 
@@ -41,61 +41,63 @@ income_projection_table = income_table.income_table(start_date = income_projecti
 
 st.write(income_projection_table)
 
-if Inc_Exp is not None:
+#if Inc_Exp is not None:
     
-    st.sidebar.subheader('Interest Shock Selection')
-    shock_to_compare = st.sidebar.multiselect(
-         'Select the Interest Shock scenarios you would like to compare?',
-         Inc_Exp.Shock.unique())
-    
-    st.write('You are comparing the following shock Scenarios:', print(shock_to_compare))
-      
-    
-    st.sidebar.subheader('Zinsbindung Selection')
-    ZB_to_compare = st.sidebar.multiselect(
-         'Select the Zinsbindung scenarios you would like to compare?',
-         ZB_array )
-    
-    st.write('You are comparing the following Zinsbindung Scenarios:',  print(ZB_to_compare))
-    
-    S2Compare = np.array(ZB_to_compare)
-        
-    if S2Compare is not None :
-        imported = tester.multikulti(S2Compare)
-        st.write(imported)
-    st.write("""
-             
-    """)
-    
-    
-    st.sidebar.subheader('Bausparvertag Selection')
-    BSV_ind_to_compare = st.sidebar.multiselect(
-         'Select the Bausparvertag scenarios you would like to compare?',
-         Inc_Exp.BSV_ind.unique())
-    
-    st.write('You are comparing the following Bausparvertag Scenarios:',  print(BSV_ind_to_compare))
-    st.write("""
-             
-    """)
-    
-    
-    st.write(Inc_Exp)
-    
-    if any([ZB_to_compare, BSV_ind_to_compare, shock_to_compare]) is not None:
-        Inc_Exp1=Inc_Exp.copy()
-        Inc_Exp1=Inc_Exp1[(Inc_Exp1.Shock.isin(shock_to_compare))&(Inc_Exp1.ZB.isin(ZB_to_compare))&(Inc_Exp1.BSV_ind.isin(BSV_ind_to_compare))].dropna()
-        
-        st.subheader('Scheduled payment Comparison')
-        fig = px.line(Inc_Exp1, x="Payment_Date", y="Sched_Payment", color="Scenario", 
-                      line_dash="BSV_ind", hover_name="Scenario")
-        
-        st.plotly_chart(fig, use_container_width=True)
-        
-        
-        st.subheader('Cumulative Interest Comparison')
-        fig = px.line(Inc_Exp1, x="Payment_Date", y="Cum_Interest", color="Scenario", 
-                      line_dash="BSV_ind", hover_name="Scenario")
-        
-        st.plotly_chart(fig, use_container_width=True)
-else :
-    pass
+#st.sidebar.subheader('Interest Shock Selection')
+#shock_to_compare = st.sidebar.multiselect(
+ #    'Select the Interest Shock scenarios you would like to compare?',
+  #   Inc_Exp.Shock.unique())
+
+#st.write('You are comparing the following shock Scenarios:', print(shock_to_compare))
+     
+
+st.sidebar.subheader('Zinsbindung Selection')
+ZB_to_compare = st.sidebar.multiselect(
+     'Select the Zinsbindung scenarios you would like to compare?',
+     ZB_array )
+
+st.write('You are comparing the following Zinsbindung Scenarios:',  print(ZB_to_compare))
+
+S2Compare = np.array(ZB_to_compare)
+     
+if S2Compare is not None :
+     imported = tester.multikulti(S2Compare)
+     st.write(imported)
+st.write("""
+          
+""")
+
+
+st.sidebar.subheader('Bausparvertag Selection')
+BSV_ind_to_compare = st.sidebar.multiselect(
+     'Select the Bausparvertag scenarios you would like to compare?',
+     income_projection_table.BSV_ind.unique())
+
+st.write('You are comparing the following Bausparvertag Scenarios:',  print(BSV_ind_to_compare))
+st.write("""
+          
+""")
+
+
+st.write(Inc_Exp)
+
+if any([ZB_to_compare, BSV_ind_to_compare]) is not None:
+     Inc_Exp1=income_projection_table.copy()
+     Inc_Exp1=Inc_Exp1[(Inc_Exp1.BSV_ind.isin(BSV_ind_to_compare))].dropna()
+     
+     st.subheader('Scheduled payment Comparison')
+     fig = px.line(Inc_Exp1, x="Payment_Date", y="tot_Income", color="BSV_ind", 
+                    #line_dash="BSV_ind", 
+                    hover_name="Scenario")
+     
+     st.plotly_chart(fig, use_container_width=True)
+     
+     
+     st.subheader('Cumulative Interest Comparison')
+     fig = px.line(Inc_Exp1, x="Payment_Date", y="living_exp", color="BSV_ind", 
+                    #line_dash="BSV_ind",
+                    hover_name="Scenario")
+     
+     st.plotly_chart(fig, use_container_width=True)
+#else :
+ #   pass
