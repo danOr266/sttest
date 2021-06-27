@@ -4,6 +4,6 @@ numpy==1.19.2
 yfinance==0.1.59
 plotly==5.0.0
 numpy_financial==1.0.0
-datetime
-collections
-dateutil
+python-dateutil==2.8.1
+sortedcollections==1.2.1
+
