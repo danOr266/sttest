@@ -37,7 +37,7 @@ st.sidebar.subheader('Income Projection Input Data')
 
 income_projection_start_date = st.sidebar.date_input(label = 'Selection income start projection date', 
                                                        value =None, min_value = date.today())
-income_projection_table = income_table(start_date = income_projection_start_date, income_p1 = 3000, income_p2 = 1700, income_increase_rate = 1.015)
+income_projection_table = income_table.income_table(start_date = income_projection_start_date, income_p1 = 3000, income_p2 = 1700, income_increase_rate = 1.015)
 
 st.write(income_projection_table)
 
