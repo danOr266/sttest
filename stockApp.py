@@ -60,12 +60,6 @@ st.write('You are comparing the following Zinsbindung Scenarios:',  print(ZB_to_
 
 S2Compare = np.array(ZB_to_compare)
      
-if S2Compare is not None :
-     imported = tester.multikulti(S2Compare)
-     st.write(imported)
-st.write("""
-          
-""")
 
 
 st.sidebar.subheader('Bausparvertag Selection')
@@ -78,8 +72,6 @@ st.write("""
           
 """)
 
-
-st.write(Inc_Exp)
 
 if any([ZB_to_compare, BSV_ind_to_compare]) is not None:
      Inc_Exp1=income_projection_table.copy()
