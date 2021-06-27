@@ -9,7 +9,7 @@ from dateutil.relativedelta import *
 
 
 def income_table(start_date, income_p1, income_p2, income_increase_rate ,bonus = 0, bonus_month = '12', no_kids = 1, kindergeld_rate = 219, base_living_expenses = 2700, 
-                living_cost_inflation= 1.02,no_projection_years = 22, BSV_ind = 0, BSV_extra = 0):
+                living_cost_inflation= 1.02,no_projection_years = 22, BSV_ind = 1, BSV_extra = 300):
     rng = pd.date_range(datetime.datetime.strptime(str(start_date), '%Y-%m-%d').date(), periods=no_projection_years*12, freq='MS')
     rng.name = "Payment_Date"
 
@@ -30,6 +30,8 @@ def income_table(start_date, income_p1, income_p2, income_increase_rate ,bonus =
     for i in df.index:
         if i.strftime("%m") == bonus_month:
             df.loc[df.index == i,'bonus'] = bonus
+        else :
+            df.loc[df.index == i,'bonus'] = 0
       
     df['tot_Income'] =  df['income_p2'] + df['income_p1'] + df['bonus'] +  df['Kindergeld']
      #= datetime.datetime.strptime(str(start_date), '%Y-%m-%d').date()
