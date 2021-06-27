@@ -44,8 +44,8 @@ if Inc_Exp is not None:
          Inc_Exp.ZB.unique())
     
     st.write('You are comparing the following Zinsbindung Scenarios:',  print(ZB_to_compare))
-
-     S2Compare = np.array(ZB_to_compare)
+    
+    S2Compare = np.array(ZB_to_compare)
         
     if S2Compare is not None :
         imported = tester.multikulti(S2Compare)
