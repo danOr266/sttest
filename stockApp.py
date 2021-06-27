@@ -4,8 +4,11 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import plotly.express as px
+from datetime import *
 #import plotly.figure_factory as ff
 import tester
+import amortisation_table
+import income_table
 
 #import urllib
 #import pyodbc
@@ -26,7 +29,16 @@ st.title('Loan Comparison App')
 Inc_Exp = st.sidebar.file_uploader('File uploader', type=["csv"]   )
 Inc_Exp = pd.read_csv(Inc_Exp)
 
+ZB_array = np.array([10, 15, 20])
 
+
+st.sidebar.subheader('Income Projection Input Data')
+
+income_projection_start_date = st.sidebar.date_input(label = 'Selection income start projection date', 
+                                                       value =None, min_value = date.today())
+income_projection_table = income_table(start_date = income_projection_start_date, income_p1 = 3000, income_p2 = 1700, income_increase_rate = 1.015)
+
+st.write(income_projection_table)
 
 if Inc_Exp is not None:
     
@@ -41,7 +53,7 @@ if Inc_Exp is not None:
     st.sidebar.subheader('Zinsbindung Selection')
     ZB_to_compare = st.sidebar.multiselect(
          'Select the Zinsbindung scenarios you would like to compare?',
-         Inc_Exp.ZB.unique())
+         ZB_array )
     
     st.write('You are comparing the following Zinsbindung Scenarios:',  print(ZB_to_compare))
     
