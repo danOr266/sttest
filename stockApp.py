@@ -23,6 +23,7 @@ ZB_to_compare = st.sidebar.multiselect(
 
 scenario_df = pd.DataFrame(columns=['ZB','loan_amount','years','payments_year', 'start_date'], dtype='float')
 scenario_interest = np.array([0.0])
+container1 = list()
 i = 0
 for ZB in ZB_to_compare:
 
@@ -32,8 +33,10 @@ for ZB in ZB_to_compare:
           years = st.number_input(label='Enter the loan repayment length in years')
           payments_year = st.number_input(label='Enter the number of payments in a year')
           start_date = st.date_input(label = 'Selection income start projection date', value =None, min_value = date.today(), )
-          submit_button  = st.form_submit_button(label=f'Submit_{ZB}', )
+          st.form_submit_button(label=f'Submit_{ZB}', )
+          i = i+1
      scenario_df.loc[-1] = [ZB, loan_amount, years, payments_year, start_date ]
+     scenario_df.reset_index(inplace = True)
 st.write(scenario_df)
 st.sidebar.subheader('Income Projection Input Data')
 
@@ -46,21 +49,9 @@ income_projection_table = pd.concat([income_table.income_table(start_date = inco
 
 st.write(income_projection_table)
 
-#if Inc_Exp is not None:
-    
-#st.sidebar.subheader('Interest Shock Selection')
-#shock_to_compare = st.sidebar.multiselect(
- #    'Select the Interest Shock scenarios you would like to compare?',
-  #   Inc_Exp.Shock.unique())
-
-#st.write('You are comparing the following shock Scenarios:', print(shock_to_compare))
-     
 
 st.sidebar.subheader('Zinsbindung Selection')
-
-
 st.write('You are comparing the following Zinsbindung Scenarios:',  print(ZB_to_compare))
-
 S2Compare = np.array(ZB_to_compare)
      
 
