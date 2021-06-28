@@ -35,7 +35,7 @@ for ZB in ZB_to_compare:
           start_date = st.date_input(label = 'Selection income start projection date', value =None, min_value = date.today(), )
           st.form_submit_button(label=f'Submit_{ZB}', )
           temp_df = pd.DataFrame( [ZB, loan_amount, years, payments_year, start_date ],
-                              columns=['ZB','loan_amount','years','payments_year', 'start_date'], index= i)
+                              columns=['ZB','loan_amount','years','payments_year', 'start_date'])
           i = i+1
      scenario_df.append(temp_df)
      
