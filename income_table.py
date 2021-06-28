@@ -19,7 +19,7 @@ def income_table(start_date, income_p1, income_p2, income_increase_rate ,bonus =
     rng.name = "Payment_Date"
 
     df = pd.DataFrame(index = rng , columns=['income_p2','income_p1','bonus', 'Kindergeld'
-                                         ,'tot_Income', 'living_exp'], dtype='float')
+                                         ,'tot_Income', 'living_exp', 'cum_net_income','BSV_ind', 'BSV_extra' ], dtype='float')
 
     start_year = start_date.year
 
