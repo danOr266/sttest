@@ -27,8 +27,8 @@ def income_table(start_date, income_p1, income_p2, income_increase_rate ,bonus =
 
     for i in df.index:
        # if i < datetime.datetime(2022, 7, 1):
-        df.loc[df.index == i,'income_p2'] = income_p2*pow(income_increase_rate, i.year -start_year) +  BSV_extra
-        df.loc[df.index == i,'income_p1'] = income_p1*pow(income_increase_rate, i.year -start_year) +  BSV_extra
+        df.loc[df.index == i,'income_p2'] = income_p2*pow(income_increase_rate, i.year -start_year) 
+        df.loc[df.index == i,'income_p1'] = income_p1*pow(income_increase_rate, i.year -start_year) 
         df.loc[df.index == i,'Kindergeld'] = no_kids * kindergeld_rate
         df.loc[df.index == i,'living_exp'] =  (base_living_expenses )*pow(living_cost_inflation, i.year -start_year) +  BSV_extra*BSV_ind*BSV_indicator_payment(i.year -start_year)
  
