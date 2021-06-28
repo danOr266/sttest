@@ -11,18 +11,6 @@ import tester
 import amortisation_table
 import income_table
 
-#import urllib
-#import pyodbc
-#from sqlalchemy import create_engine
-
-
-#Setting up Database Connection
-#conn = pyodbc.connect('''Driver={ODBC Driver 17 for SQL Server};Server=(localdb)\MSSQLLocalDB;Database=Zuhause;Trusted_Connection=yes;''')
-#cursor = conn.cursor()
-#quoted = urllib.parse.quote_plus("DRIVER={ODBC Driver 17 for SQL Server};SERVER=(localdb)\MSSQLLocalDB;Database=Zuhause;Trusted_Connection=yes;")
-#engine = create_engine('mssql+pyodbc:///?odbc_connect={}'.format(quoted))
-
-
 
 st.title('Loan Comparison App')
 
@@ -30,7 +18,24 @@ st.title('Loan Comparison App')
 #Inc_Exp = st.sidebar.file_uploader('File uploader', type=["csv"]   )
 #Inc_Exp = pd.read_csv(Inc_Exp)
 
+st.sidebar.subheader('Input - Scenarios to run')
+
 ZB_array = np.array([10, 15, 20])
+ZB_to_compare = st.sidebar.multiselect(
+     'Select the Zinsbindung scenarios you would like to compare?',
+     ZB_array )
+
+scenario_interest = np.array([0.0])
+i = 1
+for ZB in ZB_array:
+     with st.form(key='my_form'):
+          st.write(f'For the{ZB}, enter the following load details')
+          loan_amt = st.number_input(label='Enter the loan amount to be borrowed')
+          years = st.number_input(label='Enter the loan repayment length in years')
+          payments_year = st.number_input(label='Enter the number of payments in a year')
+          start_date = st.sidebar.date_input(label = 'Selection income start projection date', value =None, min_value = date.today())
+          submit_button = st.form_submit_button(label='Submit')
+
 
 
 st.sidebar.subheader('Income Projection Input Data')
@@ -55,9 +60,7 @@ st.write(income_projection_table)
      
 
 st.sidebar.subheader('Zinsbindung Selection')
-ZB_to_compare = st.sidebar.multiselect(
-     'Select the Zinsbindung scenarios you would like to compare?',
-     ZB_array )
+
 
 st.write('You are comparing the following Zinsbindung Scenarios:',  print(ZB_to_compare))
 
@@ -81,7 +84,7 @@ if any([ZB_to_compare, BSV_ind_to_compare]) is not None:
      Inc_Exp1=Inc_Exp1[(Inc_Exp1.BSV_ind.isin(BSV_ind_to_compare))].dropna()
      
      st.subheader('Scheduled payment Comparison')
-     fig = px.line(Inc_Exp1, x="Payment_Date", y="cum_net_income", color="BSV_ind", 
+     fig = px.line(Inc_Exp1, x="Payment_Date", y="cum_net_income  ", color="BSV_ind", 
                     #line_dash="BSV_ind",                     hover_name="Scenario"
                     # 
                     )
