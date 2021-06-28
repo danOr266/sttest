@@ -27,8 +27,8 @@ ZB_to_compare = st.sidebar.multiselect(
 
 scenario_interest = np.array([0.0])
 i = 1
-for ZB in ZB_array:
-     with st.form(key='my_form'):
+for ZB in ZB_to_compare:
+     with st.form(key=f'my_form{ZB}'):
           st.write(f'For the{ZB}, enter the following load details')
           loan_amt = st.number_input(label='Enter the loan amount to be borrowed')
           years = st.number_input(label='Enter the loan repayment length in years')
