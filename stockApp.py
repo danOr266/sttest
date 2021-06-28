@@ -31,13 +31,13 @@ for ZB in ZB_to_compare:
           loan_amount = st.number_input(label='Enter the loan amount to be borrowed')
           years = st.number_input(label='Enter the loan repayment length in years')
           payments_year = st.number_input(label='Enter the number of payments in a year')
-          start_date = st.sidebar.date_input(label = 'Selection income start projection date', value =None, min_value = date.today(), )
-          submit_button  = st.form_submit_button(label='Submit')
+          start_date = st.date_input(label = 'Selection income start projection date', value =None, min_value = date.today(), )
+          submit_button  = st.form_submit_button(label=f'Submit_{ZB}', )
      scenario_df.loc[-1] = [ZB, loan_amount, years, payments_year, start_date ]
 st.write(scenario_df)
 st.sidebar.subheader('Income Projection Input Data')
 
-income_projection_start_date = st.sidebar.date_input(label = 'Selection income start projection date', 
+income_projection_start_date = st.sidebar.date_input(label = 'Selection income start projection date1', 
                                                        value =None, min_value = date.today())
 
 #income_projection_start_date = income_projection_start_date.datetime.date()
