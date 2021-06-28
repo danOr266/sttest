@@ -37,7 +37,7 @@ for ZB in ZB_to_compare:
           f'submit_button{ZB}' = st.form_submit_button(label='Submit')
 
 
-st.write([{ZB}, payments_year])
+st.write([{ZB}, payments_year10])
 st.sidebar.subheader('Income Projection Input Data')
 
 income_projection_start_date = st.sidebar.date_input(label = 'Selection income start projection date', 
