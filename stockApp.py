@@ -10,6 +10,7 @@ from datetime import *
 import tester
 import amortisation_table
 import income_table
+import scenario_generation
 
 #Inc_Exp = st.sidebar.file_uploader('File uploader', type=["csv"]   ) #Inc_Exp = pd.read_csv(Inc_Exp)
 
@@ -17,27 +18,44 @@ st.title('Loan Comparison App')
 st.sidebar.subheader('Input - Scenarios to run')
 
 ZB_array = np.array([10, 15, 20])
+BSV_ind_array = np.array([0, 1])
+
 ZB_to_compare = st.sidebar.multiselect(
      'Select the Zinsbindung scenarios you would like to compare?',
      ZB_array )
 
-scenario_df = pd.DataFrame(columns=['ZB','loan_amount','years','payments_year', 'start_date'], dtype='float')
-scenario_interest = np.array([0.0])
-container1 = list()
-i = 0
+BSV_to_compare = st.sidebar.singleselect(
+     'Select wheather you wish to use BSV?', BSV_ind_array )
+
+scenario_df = pd.DataFrame(columns=['ZB','loan_amount','interest_rate','years','payments_year', 'start_date', 'BSV_ind', 'BSV_amount', 'BSV_loan_amount'], dtype='float')
+
+if BSV_to_compare == 0:
+     BSV_amount = 0
+     BSV_loan_amount = 0
+else:
+     BSV_ind = 1
+     BSV_amount = st.sidebar.number_input(label='Enter the BSV accumulated amount + loan amount to be borrowed')
+     BSV_loan_amount =  st.sidebar.number_input(label='Enter the BSV  loan amount to be repayed')
+
 for ZB in ZB_to_compare:
 
      with st.form(key=f'my_form{ZB}'):
           st.write(f'For the{ZB}, enter the following load details')
           loan_amount = st.number_input(label='Enter the loan amount to be borrowed')
+          interest_rate = st.number_input(label='Enter the interest_rate on the loan')
           years = st.number_input(label='Enter the loan repayment length in years')
           payments_year = st.number_input(label='Enter the number of payments in a year')
           start_date = st.date_input(label = 'Selection income start projection date', value =None, min_value = date.today(), )
           st.form_submit_button(label=f'Submit_{ZB}', )
-          temp_df = pd.DataFrame( [ZB, loan_amount, years, payments_year, start_date ]).T
+          if BSV_to_compare == 0:
+               temp_df = pd.DataFrame( [ZB, loan_amount, interest_rate, years, payments_year, start_date, 0, 0, 0 ]).T
+          else :
+               temp_df1 = pd.DataFrame( [ZB, loan_amount, interest_rate, years, payments_year, start_date, 0, 0, 0 ]).T
+               temp_df2 = pd.DataFrame( [ZB, loan_amount, interest_rate, years, payments_year, start_date, BSV_ind, BSV_amount, BSV_loan_amount ]).T
+               temp_df = pd.concat([temp_df1,temp_df2])
           temp_df.columns = scenario_df.columns
           i = i+1
-     scenario_df = pd.concat([temp_df,scenario_df])
+     scenario_df = pd.concat([temp_df1,scenario_df])
      
 st.write(scenario_df)
 st.sidebar.subheader('Income Projection Input Data')
