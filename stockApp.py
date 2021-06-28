@@ -81,7 +81,7 @@ if any([ZB_to_compare, BSV_ind_to_compare]) is not None:
      Inc_Exp1=Inc_Exp1[(Inc_Exp1.BSV_ind.isin(BSV_ind_to_compare))].dropna()
      
      st.subheader('Scheduled payment Comparison')
-     fig = px.line(Inc_Exp1, x="Payment_Date", y="tot_Income", color="BSV_ind", 
+     fig = px.line(Inc_Exp1, x="Payment_Date", y="cum_net_income", color="BSV_ind", 
                     #line_dash="BSV_ind",                     hover_name="Scenario"
                     # 
                     )
