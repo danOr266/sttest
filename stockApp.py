@@ -24,9 +24,9 @@ ZB_to_compare = st.sidebar.multiselect(
      'Select the Zinsbindung scenarios you would like to compare?',
      ZB_array )
 
-BSV_to_compare = st.sidebar.singleselect(
+BSV_to_compare = st.sidebar.radio(
      'Select wheather you wish to use BSV?', BSV_ind_array )
-
+BSV_to_compare = int(BSV_to_compare)
 scenario_df = pd.DataFrame(columns=['ZB','loan_amount','interest_rate','years','payments_year', 'start_date', 'BSV_ind', 'BSV_amount', 'BSV_loan_amount'], dtype='float')
 
 if BSV_to_compare == 0:
