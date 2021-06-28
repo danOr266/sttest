@@ -54,7 +54,7 @@ for ZB in ZB_to_compare:
                temp_df2 = pd.DataFrame( [ZB, loan_amount, interest_rate, years, payments_year, start_date, BSV_ind, BSV_amount, BSV_loan_amount ]).T
                temp_df = pd.concat([temp_df1,temp_df2])
           temp_df.columns = scenario_df.columns
-     scenario_df = pd.concat([temp_df1,scenario_df])
+     scenario_df = pd.concat([temp_df,scenario_df])
      
 st.write(scenario_df)
 st.sidebar.subheader('Income Projection Input Data')
