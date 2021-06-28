@@ -30,14 +30,15 @@ i = 1
 for ZB in ZB_to_compare:
      with st.form(key=f'my_form{ZB}'):
           st.write(f'For the{ZB}, enter the following load details')
-          f'loan_amount{ZB}' = st.number_input(label='Enter the loan amount to be borrowed')
-          f'years{ZB}' = st.number_input(label='Enter the loan repayment length in years')
-          f'payments_year{ZB}' = st.number_input(label='Enter the number of payments in a year')
-          f'start_date{ZB}' = st.sidebar.date_input(label = 'Selection income start projection date', value =None, min_value = date.today(), )
-          f'submit_button{ZB}' = st.form_submit_button(label='Submit')
+          loan_amount = st.number_input(label='Enter the loan amount to be borrowed')
+          years = st.number_input(label='Enter the loan repayment length in years')
+          payments_year = st.number_input(label='Enter the number of payments in a year')
+          start_date = st.sidebar.date_input(label = 'Selection income start projection date', value =None, min_value = date.today(), )
+          submit_button  = st.form_submit_button(label='Submit')
+     
 
 
-st.write([{ZB}, payments_year10])
+st.write([{ZB}, payments_year])
 st.sidebar.subheader('Income Projection Input Data')
 
 income_projection_start_date = st.sidebar.date_input(label = 'Selection income start projection date', 
@@ -84,11 +85,7 @@ if any([ZB_to_compare, BSV_ind_to_compare]) is not None:
      Inc_Exp1=Inc_Exp1[(Inc_Exp1.BSV_ind.isin(BSV_ind_to_compare))].dropna()
      
      st.subheader('Scheduled payment Comparison')
-     fig = px.line(Inc_Exp1, x="Payment_Date", y="cum_net_income  ", color="BSV_ind", 
-                    #line_dash="BSV_ind",                     hover_name="Scenario"
-                    # 
-                    )
-     
+     fig = px.line(Inc_Exp1, x="Payment_Date", y="cum_net_income  ", color="BSV_ind")
      st.plotly_chart(fig, use_container_width=True)
      
      
