@@ -11,13 +11,9 @@ import tester
 import amortisation_table
 import income_table
 
+#Inc_Exp = st.sidebar.file_uploader('File uploader', type=["csv"]   ) #Inc_Exp = pd.read_csv(Inc_Exp)
 
 st.title('Loan Comparison App')
-
-
-#Inc_Exp = st.sidebar.file_uploader('File uploader', type=["csv"]   )
-#Inc_Exp = pd.read_csv(Inc_Exp)
-
 st.sidebar.subheader('Input - Scenarios to run')
 
 ZB_array = np.array([10, 15, 20])
@@ -25,9 +21,11 @@ ZB_to_compare = st.sidebar.multiselect(
      'Select the Zinsbindung scenarios you would like to compare?',
      ZB_array )
 
+scenario_df = pd.DataFrame(columns=['ZB','loan_amount','years','payments_year', 'start_date'], dtype='float')
 scenario_interest = np.array([0.0])
-i = 1
+i = 0
 for ZB in ZB_to_compare:
+
      with st.form(key=f'my_form{ZB}'):
           st.write(f'For the{ZB}, enter the following load details')
           loan_amount = st.number_input(label='Enter the loan amount to be borrowed')
@@ -35,10 +33,8 @@ for ZB in ZB_to_compare:
           payments_year = st.number_input(label='Enter the number of payments in a year')
           start_date = st.sidebar.date_input(label = 'Selection income start projection date', value =None, min_value = date.today(), )
           submit_button  = st.form_submit_button(label='Submit')
-     
-
-
-st.write([{ZB}, payments_year])
+     scenario_df.loc[-1] = [ZB, loan_amount, years, payments_year, start_date ]
+st.write(scenario_df)
 st.sidebar.subheader('Income Projection Input Data')
 
 income_projection_start_date = st.sidebar.date_input(label = 'Selection income start projection date', 
