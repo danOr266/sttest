@@ -12,7 +12,7 @@ import amortisation_table
 
 def scenario_generation(scenario_table, scenario_vector):
     All_Scenarios = pd.DataFrame()
-    for i in range(0, len(scenario_table)):
+    for i in range(0, scenario_table.shape[0]):
         principal = scenario_table['loan_amount'][i]
         years = scenario_table['years'][i]
         payments_year = scenario_table['payments_year'][i]
