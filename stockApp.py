@@ -44,15 +44,14 @@ else:
 scenarios_to_compare = st.sidebar.slider('select range of Interest rate shock',min_value = -0.5, max_value=5.0, value=(0.0,3.0), step=0.5)
 
 scenario_vector = np.array(list(of.drange(scenarios_to_compare[0],scenarios_to_compare[1],jump= 0.5)))*0.01
-st.write(scenario_vector)
+#st.write(scenario_vector)
 
 if BSV_to_compare is not None:
      scenario_df = input_columns.input_columns(ZB_to_compare, BSV_to_compare, BSV_ind, BSV_amount, BSV_loan_amount)
 
 if scenario_df is not None:
-     scenario_vector1 = pd.DataFrame([scenario_vector], columns=['Interest_increase'])
-     fig = px.bar(scenario_vector1, x=scenario_vector1.index, y='Interest_increase', color = 'RdYlGn')
-     st.plotly_chart(fig, use_container_width=True)
+     scenario_vector1 = pd.DataFrame(scenario_vector, columns=['Interest_increase'])
+     st.bar_chart(scenario_vector1)
     
 
 st.sidebar.subheader('Income Projection Input Data')
