@@ -39,18 +39,18 @@ def scenario_generation(scenario_table, scenario_vector):
                     principal = BSV_loan_amount * BSV_ind,                   
                     BSV_ind = BSV_ind )
         
-        for s in scenario_vector:
-            df_post_ZB =  amortisation_table.framer(interest_rate = s,
+        for s in range(0, len(scenario_vector)):
+            df_post_ZB =  amortisation_table.framer(interest_rate = scenario_vector[s],
                         years = 23- ZB,
                         payments_year = payments_year,
                         principal = rest_schuld_base, 
                         kfw_ford = 0,
                         y_sond_tilg=0,
                         BSV_ind = i )
-            scenario_interest = str(s*100) + '%'
+            scenario_interest = str(scenario_vector[s]*100) + '%'
                 
         
-        df_scenario= amortisation_table.combiner(df_start, df_BSV, df_post_ZB )
+        df_scenario= amortisation_table.combiner(df_start, df_BSV, df_post_ZB, Scenario= scenario_interest )
         All_Scenarios = pd.concat([df_scenario, All_Scenarios])
     All_Scenarios.drop_duplicates()
 
