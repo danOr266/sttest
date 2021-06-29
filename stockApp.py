@@ -16,7 +16,7 @@ import decimal as dl
 import input_columns
 
 #Inc_Exp = st.sidebar.file_uploader('File uploader', type=["csv"]   ) #Inc_Exp = pd.read_csv(Inc_Exp)
-
+st.set_page_config(layout="wide")
 st.title('Loan Comparison App')
 st.sidebar.subheader('Input - Scenarios to run')
 
