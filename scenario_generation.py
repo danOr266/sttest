@@ -49,11 +49,9 @@ def scenario_generation(scenario_table, scenario_vector):
                         y_sond_tilg=0,
                         BSV_ind = BSV_ind )
             scenario_interest = str(scenario_vector[s]*100) + '%'
-                
-        
-        df_scenario= amortisation_table.combiner(df_start, df_BSV, df_post_ZB, Scenario= scenario_interest )
-        All_Scenarios = pd.concat([df_scenario, All_Scenarios])
-    All_Scenarios.drop_duplicates()
+            df_scenario= amortisation_table.combiner(df_start, df_BSV, df_post_ZB, Scenario= scenario_interest )
+            All_Scenarios = pd.concat([df_scenario, All_Scenarios])
+        All_Scenarios.drop_duplicates()
 
     return All_Scenarios
 
