@@ -37,7 +37,7 @@ else:
      BSV_amount = st.sidebar.number_input(label='Enter the BSV accumulated amount + loan amount to be borrowed')
      BSV_loan_amount =  st.sidebar.number_input(label='Enter the BSV  loan amount to be repayed')
 
-scenarios_to_compare = st.sidebar.slider('select range of Interest rate shock',min_value = -0.5, max_value=5.0, value=0.0, step=0.5)
+scenarios_to_compare = st.sidebar.slider('select range of Interest rate shock',min_value = -0.5, max_value=5.0, value=(0.0,3.0), step=0.5)
 
 scenario_vector = np.array(range(min(scenarios_to_compare), max(scenarios_to_compare),step = 0.5))
 st.write(scenario_vector)
