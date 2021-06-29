@@ -11,6 +11,8 @@ import amortisation_table
 
 
 def scenario_generation(scenario_table, scenario_vector):
+    scenario_table = pd.DataFrame(scenario_table)
+    scenario_vector = np.array(scenario_vector)
     All_Scenarios = pd.DataFrame()
     for i in range(0, scenario_table.shape[0]):
         principal = scenario_table['loan_amount'][i]
