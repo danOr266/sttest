@@ -100,15 +100,13 @@ def combiner(  *argv, Scenario = 'B'):
 
 def anschluss (df, year):
     months = int(year*12)
-    months = min(df[df.BSV_ind == 0].shape[0], months)
-    df_0 = df[df.BSV_ind == 0][0:months].sort_values(by = 'Payment_Date')
-    df_1 = df[df.BSV_ind == 1][0:months].sort_values(by = 'Payment_Date')
-    base = pd.concat([df_0, df_1])
-    rest_schuld = max(df_0.loc[months, "Curr_Balance"],0)
+    months = min(df.shape[0], months)
+    base = df[0:months].sort_values(by = 'Payment_Date')
+    rest_schuld = max(base.loc[months, "Curr_Balance"],0)
 
     if rest_schuld == 0:
-        next_payment_DT = df[df.BSV_ind == 0].loc[months, "Payment_Date"]
+        next_payment_DT = df.loc[months, "Payment_Date"]
     else :
-        next_payment_DT = df[df.BSV_ind == 0].loc[months+1, "Payment_Date"]
+        next_payment_DT = df.loc[months+1, "Payment_Date"]
     
     return base, rest_schuld, next_payment_DT
