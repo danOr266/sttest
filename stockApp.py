@@ -46,12 +46,12 @@ scenarios_to_compare = st.sidebar.slider('select range of Interest rate shock',m
 scenario_vector = np.array(list(of.drange(scenarios_to_compare[0],scenarios_to_compare[1],jump= 0.5)))*0.01
 #st.write(scenario_vector)
 
-if BSV_to_compare is not None:
+if any([ZB_to_compare, BSV_to_compare, BSV_ind, BSV_amount, BSV_loan_amount]) is not None:
      scenario_df = input_columns.input_columns(ZB_to_compare, BSV_to_compare, BSV_ind, BSV_amount, BSV_loan_amount)
 
 if scenario_df is not None:
      scenario_vector1 = pd.DataFrame(scenario_vector, columns=['Interest_increase'])
-     st.bar_chart(scenario_vector1)
+     st.bar_chart(scenario_vector1, width= 5)
     
 
 st.sidebar.subheader('Income Projection Input Data')
@@ -72,8 +72,9 @@ st.write(income_projection_table)
 
 
 st.sidebar.subheader('Zinsbindung Selection')
-st.write('You are comparing the following Zinsbindung Scenarios:',  print(ZB_to_compare))
-S2Compare = np.array(ZB_to_compare)
+ZB_to_compare = st.sidebar.multiselect(
+     'Select the Zinsbindung scenarios you would like to compare?', ZB_to_compare)
+S2Compare_ZB = np.array(ZB_to_compare)
      
 
 
@@ -82,7 +83,7 @@ BSV_ind_to_compare = st.sidebar.multiselect(
      'Select the Bausparvertag scenarios you would like to compare?',
      income_projection_table.BSV_ind.unique())
 
-st.write('You are comparing the following Bausparvertag Scenarios:',  print(BSV_ind_to_compare))
+
 st.write("""
           
 """)
@@ -104,10 +105,6 @@ if any([ZB_to_compare, BSV_ind_to_compare]) is not None:
      
      st.plotly_chart(fig, use_container_width=True)
 
-
-income_expense = income_projection_table.join(mortgage_scenarios, how = 'inner', on=['Payment_Date', 'BSV_ind'] )
-
-st.write(income_expense)
-#DataFrame.join(other, on=None, how='left', lsuffix='', rsuffix='', sort=False)
-#else :
- #   pass
+if any([mortgage_scenarios, income_projection_table]) is not None:
+     income_expense = pd.merge(mortgage_scenarios, income_projection_table, how='inner',on=['Payment_Date', 'BSV_ind'])
+     st.write(income_expense)
