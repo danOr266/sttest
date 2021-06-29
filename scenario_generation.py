@@ -56,10 +56,3 @@ def scenario_generation(scenario_table, scenario_vector):
         All_Scenarios.drop_duplicates()
 
     return All_Scenarios
-
-
-
-
-
-
-#['ZB','loan_amount','years','payments_year', 'start_date']
