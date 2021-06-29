@@ -46,7 +46,7 @@ scenarios_to_compare = st.sidebar.slider('select range of Interest rate shock',m
 scenario_vector = np.array(list(of.drange(scenarios_to_compare[0],scenarios_to_compare[1],jump= 0.5)))*0.01
 #st.write(scenario_vector)
 
-if any([ZB_to_compare, BSV_to_compare, BSV_ind, BSV_amount, BSV_loan_amount]) is not None:
+if any([ZB_to_compare, BSV_to_compare, BSV_ind]) is not None:
      scenario_df = input_columns.input_columns(ZB_to_compare, BSV_to_compare, BSV_ind, BSV_amount, BSV_loan_amount)
 
 if scenario_df is not None:
@@ -60,13 +60,15 @@ income_projection_start_date = st.sidebar.date_input(label = 'Selection income s
                                                        value =None, min_value = date.today())
 
 #income_projection_start_date = income_projection_start_date.datetime.date()
-income_projection_table = pd.concat([income_table.income_table(start_date = income_projection_start_date, income_p1 = 3000, income_p2 = 1700, income_increase_rate = 1.015),
+
+if income_projection_start_date is not None:
+     income_projection_table = pd.concat([income_table.income_table(start_date = income_projection_start_date, income_p1 = 3000, income_p2 = 1700, income_increase_rate = 1.015),
                                     income_table.income_table(start_date = income_projection_start_date, income_p1 = 3000, income_p2 = 1700, income_increase_rate = 1.015, BSV_ind = 0, BSV_extra = 0)])
 
 
-
-mortgage_scenarios = scenario_generation.scenario_generation(scenario_df,scenario_vector)
-st.write(mortgage_scenarios)
+if any([scenario_df,scenario_vector]) is not None:
+     mortgage_scenarios = scenario_generation.scenario_generation(scenario_df,scenario_vector)
+     st.write(mortgage_scenarios)
 
 st.write(income_projection_table)
 
