@@ -44,6 +44,31 @@ scenarios_to_compare = st.sidebar.slider('select range of Interest rate shock',m
 scenario_vector = np.array(list(of.drange(scenarios_to_compare[0],scenarios_to_compare[1],jump= 0.5)))*0.01
 st.write(scenario_vector)
 
+if len(ZB_to_compare) == 1:
+     col1 = st.beta_columns(1)
+     with col1:
+         loan_amount = st.number_input(label='Enter the loan amount to be borrowedX1') 
+
+elif  len(ZB_to_compare) == 2:
+     col1, col2 = st.beta_columns(2)
+     with col1:
+         loan_amount = st.number_input(label='Enter the loan amount to be borrowedX1')
+     with col2:
+         loan_amount = st.number_input(label='Enter the loan amount to be borrowedX2')
+     
+elif  len(ZB_to_compare) == 3:
+     col1, col2, col3  = st.beta_columns(3)
+     with col1:
+         loan_amount = st.number_input(label='Enter the loan amount to be borrowedX1')
+     with col2:
+         loan_amount = st.number_input(label='Enter the loan amount to be borrowedX2')
+     with col3:
+         loan_amount = st.number_input(label='Enter the loan amount to be borrowedX3')
+else :
+     pass
+
+
+
 for ZB in ZB_to_compare:
 
      with st.form(key=f'my_form{ZB}'):
@@ -116,7 +141,7 @@ if any([ZB_to_compare, BSV_ind_to_compare]) is not None:
      st.plotly_chart(fig, use_container_width=True)
 
 
-income_expense = pd.DataFrame.join( [income_projection_table, mortgage_scenarios], how = 'inner', on=['Payment_Date', 'BSV_ind'] )
+income_expense = income_projection_table.join([ mortgage_scenarios], how = 'inner', on=['Payment_Date', 'BSV_ind'] )
 
 st.write(income_expense)
 #DataFrame.join(other, on=None, how='left', lsuffix='', rsuffix='', sort=False)
