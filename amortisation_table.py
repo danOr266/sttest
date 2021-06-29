@@ -7,9 +7,9 @@ from collections import OrderedDict
 from dateutil.relativedelta import *
 
 # Main Amortisation Table Function
-def amort_t(interest_rate, years, payments_year, principal, 
-                       kfw_ford =0, m_sond_tilg = 0,y_sond_tilg=0, 
-                       sond_t_start = 0, start_date='2021-07-01', BSV_ind = 0, Scenario = 'B'):
+def amort_t(interest_rate, years, payments_year, principal,
+            kfw_ford =0, m_sond_tilg = 0,y_sond_tilg=0, 
+            sond_t_start = 0, start_date='2021-07-01', BSV_ind = 0, Scenario = 'B'):
     
     t = 1
     principal = max(principal,0)
@@ -22,7 +22,7 @@ def amort_t(interest_rate, years, payments_year, principal,
     sonder[0] = kfw_ford
     
     if m_sond_tilg + y_sond_tilg != 0:
-        for j in range(1,int(years * payments_year)):
+        for j in range(1,int(years * payments_year*2)):
             if j >= sond_t_start :
                 if (start_date + relativedelta(months=j-1)).month == 1 :
                     sonder[j-1] = (sonder[j-1] + m_sond_tilg + y_sond_tilg)*pow(1.00,j)
