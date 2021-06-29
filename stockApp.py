@@ -46,14 +46,13 @@ scenarios_to_compare = st.sidebar.slider('select range of Interest rate shock',m
 scenario_vector = np.array(list(of.drange(scenarios_to_compare[0],scenarios_to_compare[1],jump= 0.5)))*0.01
 #st.write(scenario_vector)
 
-if any([ZB_to_compare, BSV_to_compare, BSV_ind]) is not None:
-     pass
-else:
+if all([ZB_to_compare, BSV_to_compare, BSV_ind]) is not None:
+
      scenario_df = input_columns.input_columns(ZB_to_compare, BSV_to_compare, BSV_ind, BSV_amount, BSV_loan_amount)
 
-if scenario_df is not None:
-     scenario_vector1 = pd.DataFrame(scenario_vector, columns=['Interest_increase'])
-     st.bar_chart(scenario_vector1, width= 5)
+     if scenario_df is not None:
+          scenario_vector1 = pd.DataFrame(scenario_vector, columns=['Interest_increase'])
+          st.bar_chart(scenario_vector1, width= 5)
     
 
 st.sidebar.subheader('Income Projection Input Data')
