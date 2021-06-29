@@ -29,7 +29,7 @@ def input_columns(ZB_to_compare, BSV_to_compare, BSV_ind, BSV_amount, BSV_loan_a
             temp_df.columns = scenario_df.columns
             scenario_df = pd.concat([temp_df,scenario_df])
         scenario_df.reset_index(inplace = True, drop=True)
-    if len(ZB_to_compare) <= 3:
+    if len(ZB_to_compare) <= 3 and len(ZB_to_compare) > 1:
         with col2 :
             ZB = ZB_to_compare[1]
             with st.form(key=f'my_form{ZB}'):
