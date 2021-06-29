@@ -44,8 +44,11 @@ scenarios_to_compare = st.sidebar.slider('select range of Interest rate shock',m
 scenario_vector = np.array(list(of.drange(scenarios_to_compare[0],scenarios_to_compare[1],jump= 0.5)))*0.01
 st.write(scenario_vector)
 
-scenario_df = input_columns.input_columns(ZB_to_compare, BSV_to_compare)
+if scenario_df is not None:
+     scenario_df = input_columns.input_columns(ZB_to_compare, BSV_to_compare)
 
+if scenario_df is not None:
+     st.write(scenario_df)
 for ZB in ZB_to_compare:
 
      with st.form(key=f'my_form{ZB}'):
