@@ -13,6 +13,7 @@ import income_table
 import scenario_generation
 import other_function as of
 import decimal as dl
+import input_columns
 
 #Inc_Exp = st.sidebar.file_uploader('File uploader', type=["csv"]   ) #Inc_Exp = pd.read_csv(Inc_Exp)
 
@@ -29,7 +30,6 @@ ZB_to_compare = st.sidebar.multiselect(
 BSV_to_compare = st.sidebar.radio(
      'Select wheather you wish to use BSV?', BSV_ind_array )
 BSV_to_compare = int(BSV_to_compare)
-scenario_df = pd.DataFrame(columns=['ZB','loan_amount','interest_rate','years','payments_year', 'start_date', 'BSV_ind', 'BSV_amount', 'BSV_loan_amount'], dtype='float')
 
 if BSV_to_compare == 0:
      BSV_amount = 0
@@ -44,30 +44,7 @@ scenarios_to_compare = st.sidebar.slider('select range of Interest rate shock',m
 scenario_vector = np.array(list(of.drange(scenarios_to_compare[0],scenarios_to_compare[1],jump= 0.5)))*0.01
 st.write(scenario_vector)
 
-if len(ZB_to_compare) == 1:
-     col1 = st.beta_columns(1)
-     with col1:
-         loan_amount = st.number_input(label='Enter the loan amount to be borrowedX1') 
-
-elif  len(ZB_to_compare) == 2:
-     col1, col2 = st.beta_columns(2)
-     with col1:
-         loan_amount = st.number_input(label='Enter the loan amount to be borrowedX1')
-     with col2:
-         loan_amount = st.number_input(label='Enter the loan amount to be borrowedX2')
-     
-elif  len(ZB_to_compare) == 3:
-     col1, col2, col3  = st.beta_columns(3)
-     with col1:
-         loan_amount = st.number_input(label='Enter the loan amount to be borrowedX1')
-     with col2:
-         loan_amount = st.number_input(label='Enter the loan amount to be borrowedX2')
-     with col3:
-         loan_amount = st.number_input(label='Enter the loan amount to be borrowedX3')
-else :
-     pass
-
-
+scenario_df = input_columns.input_columns(ZB_to_compare, BSV_to_compare)
 
 for ZB in ZB_to_compare:
 
