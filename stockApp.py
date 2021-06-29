@@ -37,6 +37,11 @@ else:
      BSV_amount = st.sidebar.number_input(label='Enter the BSV accumulated amount + loan amount to be borrowed')
      BSV_loan_amount =  st.sidebar.number_input(label='Enter the BSV  loan amount to be repayed')
 
+scenarios_to_compare = st.sidebar.slider('select range of Interest rate shock',min_value = -0.5, max_value=5, value=0, step=0.5)
+
+scenario_vector = np.array(range(min(scenarios_to_compare), max(scenarios_to_compare),step = 0.5))
+st.write(scenario_vector)
+
 for ZB in ZB_to_compare:
 
      with st.form(key=f'my_form{ZB}'):
@@ -49,6 +54,7 @@ for ZB in ZB_to_compare:
           st.form_submit_button(label=f'Submit_{ZB}', )
           if BSV_to_compare == 0:
                temp_df = pd.DataFrame( [ZB, loan_amount, interest_rate, years, payments_year, start_date, 0, 0, 0 ]).T
+               temp_df.columns = scenario_df.columns
           else :
                temp_df1 = pd.DataFrame( [ZB, loan_amount, interest_rate, years, payments_year, start_date, 0, 0, 0 ]).T
                temp_df2 = pd.DataFrame( [ZB, loan_amount, interest_rate, years, payments_year, start_date, BSV_ind, BSV_amount, BSV_loan_amount ]).T
@@ -65,6 +71,11 @@ income_projection_start_date = st.sidebar.date_input(label = 'Selection income s
 #income_projection_start_date = income_projection_start_date.datetime.date()
 income_projection_table = pd.concat([income_table.income_table(start_date = income_projection_start_date, income_p1 = 3000, income_p2 = 1700, income_increase_rate = 1.015),
                                     income_table.income_table(start_date = income_projection_start_date, income_p1 = 3000, income_p2 = 1700, income_increase_rate = 1.015, BSV_ind = 0, BSV_extra = 0)])
+
+
+
+Scenrios_table = scenario_generation.scenario_generation(scenario_df,scenario_vector)
+st.write(Scenrios_table)
 
 st.write(income_projection_table)
 
