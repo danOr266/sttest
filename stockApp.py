@@ -33,6 +33,7 @@ BSV_to_compare = int(BSV_to_compare)
 
 if BSV_to_compare == 0:
      BSV_amount = 0
+     BSV_ind = 0
      BSV_loan_amount = 0
 else:
      BSV_ind = 1
@@ -59,10 +60,10 @@ for ZB in ZB_to_compare:
           start_date = st.date_input(label = 'Selection income start projection date', value =None, min_value = date.today(), )
           st.form_submit_button(label=f'Submit_{ZB}', )
           if BSV_to_compare == 0:
-               temp_df = pd.DataFrame( [ZB, loan_amount, interest_rate, years, payments_year, start_date, 0, 0, 0 ]).T
+               temp_df = pd.DataFrame( [ZB, loan_amount, interest_rate, years, payments_year, start_date, BSV_ind, BSV_amount, BSV_loan_amount ]).T
                temp_df.columns = scenario_df.columns
           else :
-               temp_df1 = pd.DataFrame( [ZB, loan_amount, interest_rate, years, payments_year, start_date, 0, 0, 0 ]).T
+               temp_df1 = pd.DataFrame( [ZB, loan_amount, interest_rate, years, payments_year, start_date, BSV_ind, BSV_amount, BSV_loan_amount ]).T
                temp_df2 = pd.DataFrame( [ZB, loan_amount, interest_rate, years, payments_year, start_date, BSV_ind, BSV_amount, BSV_loan_amount ]).T
                temp_df = pd.concat([temp_df1,temp_df2])
           temp_df.columns = scenario_df.columns
