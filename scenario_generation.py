@@ -5,6 +5,7 @@ import numpy_financial as npf
 import datetime
 from collections import OrderedDict
 from dateutil.relativedelta import *
+import amortisation_table as at
 
 import amortisation_table
 
@@ -29,13 +30,13 @@ def scenario_generation(scenario_table, scenario_vector):
                     kfw_ford = 0,
                     y_sond_tilg=0,
                     sond_t_start = 40,
-                    BSV_ind = i )
+                    BSV_ind = BSV_ind)
         base, rest_schuld_base, next_DT_base = amortisation_table.anschluss(df_start, ZB)
 
 # still need to insert KfW table
         df_BSV = amortisation_table.framer(interest_rate = 1.01,  # change to BSV rate
                     years = 6.5,    # change to BSV rate
-                    payments_year = 12,
+                    payments_year = payments_year,
                     principal = BSV_loan_amount * BSV_ind,                   
                     BSV_ind = BSV_ind )
         
@@ -46,7 +47,7 @@ def scenario_generation(scenario_table, scenario_vector):
                         principal = rest_schuld_base, 
                         kfw_ford = 0,
                         y_sond_tilg=0,
-                        BSV_ind = i )
+                        BSV_ind = BSV_ind )
             scenario_interest = str(scenario_vector[s]*100) + '%'
                 
         
