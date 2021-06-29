@@ -45,7 +45,7 @@ scenario_vector = np.array(list(of.drange(scenarios_to_compare[0],scenarios_to_c
 st.write(scenario_vector)
 
 if scenario_df is not None:
-     scenario_df = input_columns.input_columns(ZB_to_compare, BSV_to_compare)
+     scenario_df = input_columns.input_columns(ZB_to_compare, BSV_to_compare, BSV_ind, BSV_amount, BSV_loan_amount)
 
 if scenario_df is not None:
      st.write(scenario_df)
