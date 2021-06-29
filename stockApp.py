@@ -11,6 +11,8 @@ import tester
 import amortisation_table
 import income_table
 import scenario_generation
+import other_function as of
+import decimal as dl
 
 #Inc_Exp = st.sidebar.file_uploader('File uploader', type=["csv"]   ) #Inc_Exp = pd.read_csv(Inc_Exp)
 
@@ -39,7 +41,7 @@ else:
 
 scenarios_to_compare = st.sidebar.slider('select range of Interest rate shock',min_value = -0.5, max_value=5.0, value=(0.0,3.0), step=0.5)
 
-scenario_vector = np.array(range(min(scenarios_to_compare), max(scenarios_to_compare),step = 0.5))
+scenario_vector = of.drange(min(scenarios_to_compare), max(scenarios_to_compare),jump= = 0.5))
 st.write(scenario_vector)
 
 for ZB in ZB_to_compare:
