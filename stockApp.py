@@ -62,8 +62,8 @@ for ZB in ZB_to_compare:
                temp_df2 = pd.DataFrame( [ZB, loan_amount, interest_rate, years, payments_year, start_date, BSV_ind, BSV_amount, BSV_loan_amount ]).T
                temp_df = pd.concat([temp_df1,temp_df2])
           temp_df.columns = scenario_df.columns
-     scenario_df = pd.concat([temp_df,scenario_df])
-scenario_df =scenario_df.reset_index(inplace = True)     
+          scenario_df = pd.concat([temp_df,scenario_df])
+     scenario_df.reset_index(inplace = True)     
 st.write(scenario_df)
 st.sidebar.subheader('Income Projection Input Data')
 
@@ -76,8 +76,8 @@ income_projection_table = pd.concat([income_table.income_table(start_date = inco
 
 
 
-Scenrios_table = scenario_generation.scenario_generation(scenario_df,scenario_vector)
-st.write(Scenrios_table)
+mortgage_scenarios = scenario_generation.scenario_generation(scenario_df,scenario_vector)
+st.write(mortgage_scenarios)
 
 st.write(income_projection_table)
 
@@ -114,5 +114,11 @@ if any([ZB_to_compare, BSV_ind_to_compare]) is not None:
                     )
      
      st.plotly_chart(fig, use_container_width=True)
+
+
+income_expense = pd.DataFrame.join( [income_projection_table, mortgage_scenarios], how = 'inner', on=['Payment_Date', 'BSV_ind'] )
+
+st.write(income_expense)
+#DataFrame.join(other, on=None, how='left', lsuffix='', rsuffix='', sort=False)
 #else :
  #   pass
