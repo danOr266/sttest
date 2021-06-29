@@ -63,7 +63,7 @@ for ZB in ZB_to_compare:
                temp_df = pd.concat([temp_df1,temp_df2])
           temp_df.columns = scenario_df.columns
           scenario_df = pd.concat([temp_df,scenario_df])
-     scenario_df.reset_index(inplace = True)     
+     scenario_df.reset_index(inplace = True, drop=True)     
 st.write(scenario_df)
 st.sidebar.subheader('Income Projection Input Data')
 
