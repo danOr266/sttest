@@ -9,7 +9,7 @@ from dateutil.relativedelta import *
 import amortisation_table
 
 
-def scenario_generation(scenario_table, kfw, BSV_ind, scenario_vector):
+def scenario_generation(scenario_table, scenario_vector):
     All_Scenarios = pd.DataFrame()
     for i in range(0, len(scenario_table)):
         principal = scenario_table['loan_amount'][i]
