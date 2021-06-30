@@ -46,17 +46,19 @@ else:
 scenarios_to_compare = st.sidebar.slider('select range of Interest rate shock',min_value = -0.5, max_value=5.0, value=(0.0,3.0), step=0.5)
 
 scenario_vector = np.array(list(of.drange(scenarios_to_compare[0],scenarios_to_compare[1],jump= 0.5)))*0.01
-#st.write(scenario_vector)
-scenario_df = input_columns.input_columns(start_date, ZB_to_compare, BSV_to_compare, BSV_ind, BSV_amount, BSV_loan_amount)
-if st.button('Input Loan Details', key = 'input_loan_details_key'):
-     scenario_graphic1, scenario_graphic2, scenario_graphic3  = st.beta_columns(3)
-     scenario_vector1 = pd.DataFrame(scenario_vector, columns=['Interest_increase'])
-     with scenario_graphic1:
-          st.form(key = 'scenario_graphic1')
-          st.bar_chart(scenario_vector1, width= 5)
-     with scenario_graphic2:
-          st.form(key = 'scenario_graphic2')
-          st.write(scenario_df)
+
+with st.form(key = 'input_column_form'):
+     st.form_submit_button(label=f'Input loan Details',key = 'inputloanndetails_key')
+     scenario_df = input_columns.input_columns(start_date, ZB_to_compare, BSV_to_compare, BSV_ind, BSV_amount, BSV_loan_amount)
+     if st.button('Input Loan Details', key = 'input_loan_details_key'):
+          scenario_graphic1, scenario_graphic2, scenario_graphic3  = st.beta_columns(3)
+          scenario_vector1 = pd.DataFrame(scenario_vector, columns=['Interest_increase'])
+          with scenario_graphic1:
+               st.form(key = 'scenario_graphic1')
+               st.bar_chart(scenario_vector1, width= 5)
+          with scenario_graphic2:
+               st.form(key = 'scenario_graphic2')
+               st.write(scenario_df)
     
 
 st.sidebar.subheader('Income Projection Input Data')
