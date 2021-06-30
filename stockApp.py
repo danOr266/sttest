@@ -61,13 +61,12 @@ st.sidebar.subheader('Income Projection Input Data')
 #income_projection_start_date = income_projection_start_date.datetime.date()
 
 if st.button('Income Projection'):
-     income_projection_table = pd.concat([income_table.income_table(start_date = income_projection_start_date, income_p1 = 3000, income_p2 = 1700, income_increase_rate = 1.015),
-                                    income_table.income_table(start_date = income_projection_start_date, income_p1 = 3000, income_p2 = 1700, income_increase_rate = 1.015, BSV_ind = 0, BSV_extra = 0)])
+     income_projection_table = pd.concat([income_table.income_table(start_date = start_date, income_p1 = 3000, income_p2 = 1700, income_increase_rate = 1.015),
+                                    income_table.income_table(start_date = start_date, income_p1 = 3000, income_p2 = 1700, income_increase_rate = 1.015, BSV_ind = 0, BSV_extra = 0)])
 
 if st.button('Generate loan scenario'):
-     if income_projection_start_date is not None:
-          mortgage_scenarios = scenario_generation.scenario_generation(scenario_df,scenario_vector)
-          st.write(mortgage_scenarios)
+     mortgage_scenarios = scenario_generation.scenario_generation(scenario_df,scenario_vector)
+     st.write(mortgage_scenarios)
 
      st.write(income_projection_table)
 
@@ -83,16 +82,13 @@ st.sidebar.subheader('Bausparvertag Selection')
 BSV_ind_to_compare = st.sidebar.multiselect(
      'Select the Bausparvertag scenarios you would like to compare?',
      income_projection_table.BSV_ind.unique())
-
-
 st.write("""
           
 """)
 
 
-if any([ZB_to_compare, BSV_ind_to_compare]) is None:
-     pass
-else :
+if st.button('Income Projection') and st.button('Generate loan scenario') :
+  
      Inc_Exp1=income_projection_table.copy()
      Inc_Exp1=Inc_Exp1[(Inc_Exp1.BSV_ind.isin(BSV_ind_to_compare))].dropna()
      
