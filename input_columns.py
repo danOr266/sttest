@@ -5,7 +5,7 @@ import streamlit as st
 from datetime import *
 
 
-def input_columns(start_date, ZB_to_compare, BSV_to_compare, BSV_ind, BSV_amount, BSV_loan_amount):
+def input_columns(start_date,loan_amount , ZB_to_compare, BSV_to_compare, BSV_ind, BSV_amount, BSV_loan_amount):
     scenario_df = pd.DataFrame(columns=['ZB','loan_amount','interest_rate','years','payments_year', 'start_date', 'BSV_ind', 'BSV_amount', 'BSV_loan_amount'],
                                 dtype='float')
     col1, col2, col3  = st.beta_columns(3)
@@ -13,7 +13,6 @@ def input_columns(start_date, ZB_to_compare, BSV_to_compare, BSV_ind, BSV_amount
         ZB = ZB_to_compare[0]
         with st.form(key=f'my_form{ZB}'):
             st.write(f'For the {ZB} Zinsbindung, enter the following loan details')
-            loan_amount = st.number_input(label='Enter the loan amount to be borrowed')
             interest_rate = st.number_input(label='Enter the interest_rate on the loan')
             years = st.number_input(label='Enter the loan repayment length in years')
             payments_year = st.number_input(label='Enter the number of payments in a year')
@@ -34,7 +33,6 @@ def input_columns(start_date, ZB_to_compare, BSV_to_compare, BSV_ind, BSV_amount
             ZB = ZB_to_compare[1]
             with st.form(key=f'my_form{ZB}'):
                 st.write(f'For the {ZB} Zinsbindung, enter the following loan details')
-                loan_amount = st.number_input(label='Enter the loan amount to be borrowed')
                 interest_rate = st.number_input(label='Enter the interest_rate on the loan')
                 years = st.number_input(label='Enter the loan repayment length in years')
                 payments_year = st.number_input(label='Enter the number of payments in a year')
@@ -55,7 +53,6 @@ def input_columns(start_date, ZB_to_compare, BSV_to_compare, BSV_ind, BSV_amount
             ZB = ZB_to_compare[2]
             with st.form(key=f'my_form{ZB}'):
                 st.write(f'For the {ZB} Zinsbindung, enter the following loan details')
-                loan_amount = st.number_input(label='Enter the loan amount to be borrowed')
                 interest_rate = st.number_input(label='Enter the interest_rate on the loan')
                 years = st.number_input(label='Enter the loan repayment length in years')
                 payments_year = st.number_input(label='Enter the number of payments in a year')
