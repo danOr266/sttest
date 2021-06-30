@@ -23,6 +23,9 @@ st.sidebar.subheader('Input - Scenarios to run')
 ZB_array = np.array([10, 15, 20])
 BSV_ind_array = np.array([0, 1])
 
+
+start_date = st.sidebar.date_input(label = 'Selection income start projection date1', 
+                                   value =None, min_value = date.today())
 ZB_to_compare = st.sidebar.multiselect(
      'Select the Zinsbindung scenarios you would like to compare?',
      ZB_array )
@@ -40,28 +43,20 @@ else:
      BSV_amount = st.sidebar.number_input(label='Enter the BSV accumulated amount + loan amount to be borrowed')
      BSV_loan_amount =  st.sidebar.number_input(label='Enter the BSV  loan amount to be repayed')
 
-
 scenarios_to_compare = st.sidebar.slider('select range of Interest rate shock',min_value = -0.5, max_value=5.0, value=(0.0,3.0), step=0.5)
 
 scenario_vector = np.array(list(of.drange(scenarios_to_compare[0],scenarios_to_compare[1],jump= 0.5)))*0.01
 #st.write(scenario_vector)
 
-if any([ZB_to_compare, BSV_to_compare, BSV_ind]) is None:
-
-     pass
-else :
-
-     scenario_df = input_columns.input_columns(ZB_to_compare, BSV_to_compare, BSV_ind, BSV_amount, BSV_loan_amount)
-
-     if scenario_df is not None:
-          scenario_vector1 = pd.DataFrame(scenario_vector, columns=['Interest_increase'])
-          st.bar_chart(scenario_vector1, width= 5)
+if st.button('Amortization simulations'):
+     scenario_df = input_columns.input_columns(start_date, ZB_to_compare, BSV_to_compare, BSV_ind, BSV_amount, BSV_loan_amount)
+     scenario_vector1 = pd.DataFrame(scenario_vector, columns=['Interest_increase'])
+     st.bar_chart(scenario_vector1, width= 5)
     
 
 st.sidebar.subheader('Income Projection Input Data')
 
-income_projection_start_date = st.sidebar.date_input(label = 'Selection income start projection date1', 
-                                                       value =None, min_value = date.today())
+
 
 #income_projection_start_date = income_projection_start_date.datetime.date()
 
