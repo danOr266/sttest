@@ -46,7 +46,10 @@ scenarios_to_compare = st.sidebar.slider('select range of Interest rate shock',m
 scenario_vector = np.array(list(of.drange(scenarios_to_compare[0],scenarios_to_compare[1],jump= 0.5)))*0.01
 #st.write(scenario_vector)
 
-if all([ZB_to_compare, BSV_to_compare, BSV_ind]) is not None:
+if any([ZB_to_compare, BSV_to_compare, BSV_ind]) is None:
+
+     pass
+else :
 
      scenario_df = input_columns.input_columns(ZB_to_compare, BSV_to_compare, BSV_ind, BSV_amount, BSV_loan_amount)
 
