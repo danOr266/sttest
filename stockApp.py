@@ -95,7 +95,9 @@ st.write("""
 """)
 
 
-if any([ZB_to_compare, BSV_ind_to_compare]) is not None:
+if any([ZB_to_compare, BSV_ind_to_compare]) is None:
+     pass
+else :
      Inc_Exp1=income_projection_table.copy()
      Inc_Exp1=Inc_Exp1[(Inc_Exp1.BSV_ind.isin(BSV_ind_to_compare))].dropna()
      
@@ -111,6 +113,8 @@ if any([ZB_to_compare, BSV_ind_to_compare]) is not None:
      
      st.plotly_chart(fig, use_container_width=True)
 
-if any([mortgage_scenarios, income_projection_table]) is not None:
+if any([mortgage_scenarios, income_projection_table]) is None:
+     pass
+else :
      income_expense = pd.merge(mortgage_scenarios, income_projection_table, how='inner',on=['Payment_Date', 'BSV_ind'])
      st.write(income_expense)
