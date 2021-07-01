@@ -6,10 +6,11 @@ import datetime
 from collections import OrderedDict
 from dateutil.relativedelta import *
 import amortisation_table as at
+import streamlit as st
 
 import amortisation_table
 
-
+@st.cache
 def scenario_generation(scenario_table, scenario_vector):
     scenario_table = pd.DataFrame(scenario_table)
     scenario_vector = np.array(scenario_vector)
