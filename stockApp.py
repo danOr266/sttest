@@ -15,6 +15,8 @@ import other_function as of
 import decimal as dl
 import input_columns
 import income_input
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 #Inc_Exp = st.sidebar.file_uploader('File uploader', type=["csv"]   ) #Inc_Exp = pd.read_csv(Inc_Exp)
 st.set_page_config(layout="wide")
@@ -41,35 +43,41 @@ else:
      BSV_ind = 0
      BSV_loan_amount = 0
 
-scenario_vector = None
+scenario_vector = np.array(list(of.drange(scenarios_to_compare[0],scenarios_to_compare[1],jump= 0.5)))*0.01
 
-if scenario_vector == None:
-     st.stop()
-else :
-     scenario_vector = np.array(list(of.drange(scenarios_to_compare[0],scenarios_to_compare[1],jump= 0.5)))*0.01
+#with st.form(key = 'input_column_form'):
+st.subheader('Loan Input Data')
 
-with st.form(key = 'input_column_form'):
-     st.subheader('Loan Input Data')
-     st.form_submit_button(label='Input loan Details',key = 'inputloanndetails_key')
-     scenario_df = input_columns.input_columns(start_date, loan_amount ,ZB_to_compare, BSV_to_compare, BSV_ind, BSV_amount, BSV_loan_amount)
-     if st.button('Input Loan Details', key = 'input_loan_details_key'):
-          scenario_graphic1, scenario_graphic2, scenario_graphic3  = st.beta_columns(3)
-          scenario_vector1 = pd.DataFrame(scenario_vector, columns=['Interest_increase'])
-          with scenario_graphic1:
-               st.form(key = 'scenario_graphic1')
-               st.bar_chart(scenario_vector1, width= 5)
-          with scenario_graphic2:
-               st.form(key = 'scenario_graphic2')
-               st.write(scenario_df)
-    
+scenario_df = input_columns.input_columns(start_date, loan_amount ,ZB_to_compare, BSV_to_compare, BSV_ind, BSV_amount, BSV_loan_amount)
 
+if st.button('Input Loan Details', key = 'input_loan_details_key'):
+     scenario_graphic1, scenario_graphic2, scenario_graphic3  = st.beta_columns(3)
+     scenario_vector1 = pd.DataFrame(scenario_vector, columns=['Interest_increase'])
+     st.subheader('Scheduled payment Comparison')
+     with scenario_graphic1:
+          #st.form(key = 'scenario_graphic1')  
+          #sns.barplot(data =scenario_df, x="ZB", y="interest_rate", hue="BSV_ind")
+          g = sns.catplot( data = scenario_df, kind ="bar", x= 'ZB' , y= "interest_rate",  hue="BSV_ind",
+                          ci="sd", palette="dark", alpha=.6, height=6,)
+          g.despine(left=True)
+          g.set_axis_labels("Zinsbindung", "Interst rates")
+          g.legend.set_title("Bausparvertrag")
+          plt.title('Interest rates per ZB')
+          st.pyplot(g)
+          
+     with scenario_graphic2:
+          #st.form(key = 'scenario_graphic2')
+          st.bar_chart(scenario_vector1, width= 5)
+     #   st.form_submit_button(label='Input loan Details',key = 'inputloanndetails_key')
+     with scenario_graphic3:
+          st.write(scenario_df)
 if scenario_df is not None :
      st.subheader('Income Projection Input Data')
      income_input_dic = income_input.income_input()
      st.write(income_input_dic)
 
 
-st.stop()
+
 #income_projection_start_date = income_projection_start_date.datetime.date()
 
 if st.button('Income Projection',  key = 'Income_Projection_key'):
