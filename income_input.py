@@ -1,12 +1,13 @@
 import streamlit as st
 import numpy as np
+import pandas as pd
 
 months = list(map(str, range(1, 13)))
 for i in range(0,len(months)):
     months[i]= '0'+months[i]
     months[i] = months[i][-2:]
 
-@st.cache
+@st.cache(suppress_st_warning=True)
 def income_input() :
     #with st.form('Income Input Form') :
     #default values 
@@ -18,18 +19,28 @@ def income_input() :
         bonus_month_p2 = 0 
         income_p2_increase = 0
     person1, person2 = st.beta_columns(2)
-    with person1:
-        with st.form( key = 'income_p1_key'):
-            st.write('Person 1')
-            income_p1 = st.number_input( 'Enter Income of Person 1', key = 'P1K1')
-            bonus_p1 = st.number_input( 'Enter Bonus of Person 1')
-            bonus_month_p1 = st.selectbox( 'Month bonus expected for Person 1', months )
-            income_p1_increase =  st.number_input( 'Enter Income increase of Person 1')
-            living_expense =  st.number_input( 'Enter total living expenses exclusing mortgage')
-            living_expense_inflation =  st.number_input( 'Enter total living expenses excluding mortgage inflation')
-            st.form_submit_button()
-    
-    if No_of_incomes == 2:
+    if No_of_incomes == 1:
+        with person1:
+            with st.form( key = 'income_p1_key'):
+                st.write('Person 1')
+                income_p1 = st.number_input( 'Enter Income of Person 1', key = 'P1K1')
+                bonus_p1 = st.number_input( 'Enter Bonus of Person 1')
+                bonus_month_p1 = st.selectbox( 'Month bonus expected for Person 1', months )
+                income_p1_increase =  st.number_input( 'Enter Income increase of Person 1')
+                living_expense =  st.number_input( 'Enter total living expenses exclusing mortgage')
+                living_expense_inflation =  st.number_input( 'Enter total living expenses excluding mortgage inflation')
+                st.form_submit_button()
+    else :
+        with person1:
+            with st.form( key = 'income_p1_key'):
+                st.write('Person 1')
+                income_p1 = st.number_input( 'Enter Income of Person 1', key = 'P1K1')
+                bonus_p1 = st.number_input( 'Enter Bonus of Person 1')
+                bonus_month_p1 = st.selectbox( 'Month bonus expected for Person 1', months )
+                income_p1_increase =  st.number_input( 'Enter Income increase of Person 1')
+                living_expense =  st.number_input( 'Enter total living expenses exclusing mortgage')
+                living_expense_inflation =  st.number_input( 'Enter total living expenses excluding mortgage inflation')
+                st.form_submit_button()
         with person2: #w
             with st.form(key = 'income_p2_key'):
                 st.write('Person 2')
@@ -53,4 +64,5 @@ def income_input() :
                         'bonus_month_p2' : bonus_month_p2 ,
                         'income_p2_increase': income_p2_increase
                         }
-    return income_input_dict
+    income_input_df = pd.DataFrame(income_input_dict)
+    return income_input_df
