@@ -4,7 +4,7 @@ import numpy as np
 import streamlit as st
 from datetime import *
 
-@st.cache
+#@st.cache
 def input_columns(start_date,loan_amount , ZB_to_compare, BSV_to_compare, BSV_ind, BSV_amount, BSV_loan_amount):
     scenario_df = pd.DataFrame(columns=['ZB','loan_amount','interest_rate','years','payments_year', 'start_date', 'BSV_ind', 'BSV_amount', 'BSV_loan_amount'],
                                 dtype='float')
